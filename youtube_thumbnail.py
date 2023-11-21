@@ -5,21 +5,19 @@ from pytube import YouTube
 
 def download_thumbnail(video_url):
     try:
-        # Create a YouTube object
         yt = YouTube(video_url)
 
         # Get the highest resolution thumbnail URL
         thumbnail_url = yt.thumbnail_url
 
-        # Download the thumbnail using requests
         response = requests.get(thumbnail_url)
 
         if response.status_code == 200:
-            # Define the path for saving the thumbnail
+            # Download to Desktop
             desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
             thumbnail_path = os.path.join(desktop_path, 'thumbnail.jpg')
 
-            # Write the image to a file
+            # Save image
             with open(thumbnail_path, 'wb') as file:
                 file.write(response.content)
 
@@ -34,4 +32,3 @@ if __name__ == "__main__":
         download_thumbnail(video_url)
     else:
         print("Please provide a YouTube video URL.")
-
